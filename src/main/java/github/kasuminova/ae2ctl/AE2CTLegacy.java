@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
                        "required-after:jei;" +
                        "required-after:mixinbooter@[8.0,);",
         acceptedMinecraftVersions = "[1.12, 1.13)",
-        acceptableRemoteVersions = "[0.1.0, 0.2.0)"
+        acceptableRemoteVersions = "*"
 )
 @SuppressWarnings("MethodMayBeStatic")
 public class AE2CTLegacy {

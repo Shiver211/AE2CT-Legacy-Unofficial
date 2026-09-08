@@ -10,6 +10,8 @@ import github.kasuminova.ae2ctl.client.gui.widget.base.WidgetController;
 import github.kasuminova.ae2ctl.client.gui.widget.base.WidgetGui;
 import github.kasuminova.ae2ctl.client.gui.widget.impl.craftingtree.Background;
 import github.kasuminova.ae2ctl.client.gui.widget.impl.craftingtree.CraftingTree;
+import github.kasuminova.ae2ctl.client.gui.widget.impl.craftingtree.FlowchartExportHelper;
+import github.kasuminova.ae2ctl.client.gui.widget.impl.craftingtree.ScreenshotHelper;
 import github.kasuminova.ae2ctl.client.gui.widget.impl.craftingtree.event.CraftingTreeDataUpdateEvent;
 import github.kasuminova.ae2ctl.common.container.ContainerCraftingTree;
 import github.kasuminova.ae2ctl.common.integration.ae2.data.LiteCraftTreeNode;
@@ -20,6 +22,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -57,6 +60,19 @@ public class GuiCraftingTree extends AEBaseGuiContainerDynamic {
             160, 60, 24, 20
     );
 
+    private static final TextureProperties BUTTON_FLOWCHART = TextureProperties.of(
+            new ResourceLocation(AE2CTLegacy.MOD_ID, "textures/gui/guicraftingtree_dark.png"),
+            232, 40, 24, 20
+    );
+    private static final TextureProperties BUTTON_FLOWCHART_HOVERED = TextureProperties.of(
+            new ResourceLocation(AE2CTLegacy.MOD_ID, "textures/gui/guicraftingtree_dark.png"),
+            208, 40, 24, 20
+    );
+    private static final TextureProperties BUTTON_FLOWCHART_MOUSEDOWN = TextureProperties.of(
+            new ResourceLocation(AE2CTLegacy.MOD_ID, "textures/gui/guicraftingtree_dark.png"),
+            184, 40, 24, 20
+    );
+
     private static final TextureProperties BUTTON_SCREENSHOT = TextureProperties.of(
             new ResourceLocation(AE2CTLegacy.MOD_ID, "textures/gui/guicraftingtree_dark.png"),
             232, 0, 24, 20
@@ -72,6 +88,7 @@ public class GuiCraftingTree extends AEBaseGuiContainerDynamic {
 
     private final CraftingTree tree = new CraftingTree();
 
+    private final Button4State exportFlowchart = new Button4State();
     private final Button4State screenshot = new Button4State();
     private final Button5State missingOnly = new Button5State();
     private final Button4State back = new Button4State();
@@ -98,12 +115,25 @@ public class GuiCraftingTree extends AEBaseGuiContainerDynamic {
                 .setAbsXY(6, 9)
         );
         // Right Top
+        this.widgetController.addWidget(exportFlowchart
+                .setMouseDownTexture(BUTTON_FLOWCHART_MOUSEDOWN)
+                .setHoveredTexture(BUTTON_FLOWCHART_HOVERED)
+                .setTexture(BUTTON_FLOWCHART)
+                .setTooltipFunction(btn -> Arrays.asList(
+                        I18n.format("gui.crafting_tree.export_flowchart", FlowchartExportHelper.getCurrentFormat().getLabel()),
+                        I18n.format("gui.crafting_tree.export_flowchart.left_click"),
+                        I18n.format("gui.crafting_tree.export_flowchart.right_click")
+                ))
+                .setOnClickedListener(btn -> FlowchartExportHelper.exportFlowchart(tree))
+                .setOnRightClickListener(btn -> FlowchartExportHelper.toggleFormat())
+                .setWidthHeight(24, 20)
+                .setAbsXY(xSize - 114, 3));
         this.widgetController.addWidget(screenshot
                 .setMouseDownTexture(BUTTON_SCREENSHOT_MOUSEDOWN)
                 .setHoveredTexture(BUTTON_SCREENSHOT_HOVERED)
                 .setTexture(BUTTON_SCREENSHOT)
                 .setTooltipFunction(input -> Collections.singletonList(I18n.format("gui.crafting_tree.screenshot")))
-                .setOnClickedListener(btn -> {})
+                .setOnClickedListener(btn -> ScreenshotHelper.takeScreenshot(tree))
                 .setWidthHeight(24, 20)
                 .setAbsXY(xSize - 86, 3));
         this.widgetController.addWidget(missingOnly
@@ -138,6 +168,7 @@ public class GuiCraftingTree extends AEBaseGuiContainerDynamic {
 
         this.tree.setWidthHeight(background.getInternalWidth(), background.getInternalHeight())
                 .setAbsXY(background.getInternalXOffset(), background.getInternalYOffset());
+        this.exportFlowchart.setAbsXY(xSize - 114, 3);
         this.screenshot.setAbsXY(xSize - 86, 3);
         this.missingOnly.setAbsXY(xSize - 58, 3);
         this.back.setAbsXY(xSize - 30, 3);

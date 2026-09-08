@@ -340,6 +340,18 @@ public class TreeNode extends DynamicWidget {
         return this;
     }
 
+    public LiteCraftTreeNode getNode() {
+        return node;
+    }
+
+    public boolean isRoot() {
+        return root;
+    }
+
+    public int getLinkedSubNodes() {
+        return linkedSubNodes;
+    }
+
     @Override
     public boolean isMouseOver(final MousePos mousePos) {
         return isMouseOver(0, PARENT_LINE_HEIGHT, mousePos.mouseX(), mousePos.mouseY(), WIDTH, HEIGHT);

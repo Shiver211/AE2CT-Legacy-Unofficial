@@ -9,6 +9,8 @@ import github.kasuminova.ae2ctl.client.gui.widget.base.WidgetGui;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * Inherits the normal button with an additional press state.
@@ -42,8 +44,13 @@ public class Button4State extends Button {
 
     @Override
     public boolean onMouseClick(final MousePos mousePos, final RenderPos renderPos, final int mouseButton) {
-        if (isVisible() && isAvailable() && mouseButton == 0) {
-            return mouseDown = true;
+        if (isVisible() && isAvailable()) {
+            if (mouseButton == 0) {
+                return mouseDown = true;
+            } else if (mouseButton == 1 && onRightClickListener != null) {
+                onRightClickListener.accept(this);
+                return true;
+            }
         }
         return super.onMouseClick(mousePos, renderPos, mouseButton);
     }
@@ -84,6 +91,24 @@ public class Button4State extends Button {
 
     public boolean isMouseDown() {
         return mouseDown;
+    }
+
+    @Override
+    public Button4State setOnRightClickListener(final Consumer<Button> onRightClickListener) {
+        super.setOnRightClickListener(onRightClickListener);
+        return this;
+    }
+
+    @Override
+    public Button4State setOnClickedListener(final Consumer<Button> onClickedListener) {
+        super.setOnClickedListener(onClickedListener);
+        return this;
+    }
+
+    @Override
+    public Button4State setTooltipFunction(final Function<Button, List<String>> tooltipFunction) {
+        super.setTooltipFunction(tooltipFunction);
+        return this;
     }
 
 }

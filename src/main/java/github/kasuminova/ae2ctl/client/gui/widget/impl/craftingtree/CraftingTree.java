@@ -287,6 +287,18 @@ public class CraftingTree extends SizedColumn {
         return this;
     }
 
+    public LiteCraftTreeNode getRoot() {
+        return missingOnly ? missingOnlyRoot : root;
+    }
+
+    public LiteCraftTreeNode getFullRoot() {
+        return root;
+    }
+
+    public boolean isMissingOnly() {
+        return missingOnly;
+    }
+
     // Mouse events
 
     @Override

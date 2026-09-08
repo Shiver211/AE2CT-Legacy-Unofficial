@@ -27,6 +27,7 @@ public class Button extends DynamicWidget {
     protected boolean available = true;
 
     protected Consumer<Button> onClickedListener = null;
+    protected Consumer<Button> onRightClickListener = null;
     protected Function<Button, List<String>> tooltipFunction = null;
 
     @Override
@@ -47,9 +48,14 @@ public class Button extends DynamicWidget {
 
     @Override
     public boolean onMouseClick(final MousePos mousePos, final RenderPos renderPos, final int mouseButton) {
-        if (isVisible() && onClickedListener != null && mouseButton == 0) {
-            onClickedListener.accept(this);
-            return true;
+        if (isVisible() && isAvailable()) {
+            if (mouseButton == 0 && onClickedListener != null) {
+                onClickedListener.accept(this);
+                return true;
+            } else if (mouseButton == 1 && onRightClickListener != null) {
+                onRightClickListener.accept(this);
+                return true;
+            }
         }
         return false;
     }
@@ -143,6 +149,15 @@ public class Button extends DynamicWidget {
 
     public Button setOnClickedListener(final Consumer<Button> onClickedListener) {
         this.onClickedListener = onClickedListener;
+        return this;
+    }
+
+    public Consumer<Button> getOnRightClickListener() {
+        return onRightClickListener;
+    }
+
+    public Button setOnRightClickListener(final Consumer<Button> onRightClickListener) {
+        this.onRightClickListener = onRightClickListener;
         return this;
     }
 
