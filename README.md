@@ -1,7 +1,7 @@
 # AE2 Crafting Tree Legacy Unofficial
 
 
-本项目是 Kasumi_Nova 的 **[AE2CTL (AE2 Crafting Tree Legacy)](https://github.com/NovaEngineering-Source/AE2CTL)** 的**非官方分支**。
+本项目是 Kasumi_Nova 的 **[AE2CTL (AE2 Crafting Tree Legacy)](https://github.com/NovaEngineering-Source/AE2CT-Legacy)** 的**非官方分支**。
 - **本分支新增改动**：
   1. **配方树截图**：补全了原mod未完成的合成树截图功能；
   2. **流程图导出**：新增一键导出配方树的流程图功能，支持 **SVG（矢量图）** 与 **PNG（高清位图）** 两种格式（左键导出，右键切换格式）。
@@ -26,14 +26,14 @@
 
 ## 📜 致谢与开源协议
 
-- **原版作者**：[Kasumi_Nova](https://github.com/Kasumi-Nova)
+- **原版作者**：[Kasumi_Nova](https://github.com/KasumiNova)
 - **开源协议**：本项目使用 **[GNU Lesser General Public License v3.0 (LGPL-3.0)](LICENSE)** 协议。
 
 ---
 
 # AE2 Crafting Tree Legacy Unofficial (English)
 
-This project is an **unofficial fork** of Kasumi_Nova's **[AE2CTL (AE2 Crafting Tree Legacy)](https://github.com/NovaEngineering-Source/AE2CTL)**.
+This project is an **unofficial fork** of Kasumi_Nova's **[AE2CTL (AE2 Crafting Tree Legacy)](https://github.com/NovaEngineering-Source/AE2CT-Legacy)**.
 - **Changes in this fork**:
   1. **Crafting Tree Screenshot**: Implemented and completed the unfinished crafting tree screenshot feature from the original mod;
   2. **Flowchart Export**: Added a one-click recipe tree flowchart export feature, supporting both **SVG (vector)** and **PNG (high-res raster)** formats (left-click to export, right-click to toggle format).
@@ -59,5 +59,5 @@ Click the button in the top-right corner of the **Crafting Confirmation screen**
 
 ## 📜 Credits & License
 
-- **Original Author**: [Kasumi_Nova](https://github.com/Kasumi-Nova)
+- **Original Author**: [Kasumi_Nova](https://github.com/KasumiNova)
 - **License**: This project is licensed under the **[GNU Lesser General Public License v3.0 (LGPL-3.0)](LICENSE)**.
